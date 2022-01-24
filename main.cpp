@@ -1,7 +1,15 @@
 #include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
 
 using std::cout;
+using std::cin;
 using std::endl;
+using std::string;
+using std::stringstream;
+using std::stoi;
+using std::reverse;
 
 enum BASE
 {
@@ -11,6 +19,22 @@ enum BASE
     HEXADECIMAL,
     ROMAN
 };
+
+string dectobin(const string &arg)
+{
+    auto decimal = stoi(arg);
+    stringstream binary;
+    while (decimal > 1)
+    {
+        int rem = decimal % 2;
+        decimal /= 2;
+        binary << rem;
+    }
+    binary << decimal;
+    string result = binary.str();
+    reverse(result.begin(), result.end());
+    return result;
+}
 
 enum ROMAN
 {
@@ -23,11 +47,16 @@ enum ROMAN
     M = 1000
 };
 
+
+
 int main(int argc, char **argv)
 {
-    for (int i = 1; i < argc; ++i)
+    string input = "-1";
+    while (input != "")
     {
-        cout << argv[i] << endl;
+        cout << "Enter string: ";
+        cin >> input;
+        cout << dectobin(input) << endl;
     }
     return 0;
 }
