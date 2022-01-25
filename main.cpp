@@ -10,6 +10,7 @@ using std::string;
 using std::stringstream;
 using std::stoi;
 using std::reverse;
+using std::to_string;
 
 enum BASE
 {
@@ -34,6 +35,21 @@ string dectobin(const string &arg)
     string result = binary.str();
     reverse(result.begin(), result.end());
     return result;
+}
+
+string bintodec(const string &arg)
+{
+    long long result = 0;
+    for (auto &c : arg)
+    {
+        if (c == '1')
+        {
+            result += 1;
+        }
+        result <<= 1;
+    }
+    result >>= 1;
+    return to_string(result);
 }
 
 string dectoroman(const string &arg)
@@ -148,7 +164,7 @@ int main(int argc, char **argv)
     {
         cout << "Enter string: ";
         cin >> input;
-        cout << dectoroman(input) << endl;
+        cout << bintodec(input) << endl;
     }
     return 0;
 }
